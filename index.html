@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gravatar Image Display</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #gravatarImage {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            display: none;
+        }
+        #gravatarUrl {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Display Gravatar Image</h1>
+    <input type="email" id="email" placeholder="Enter your email">
+    <br>
+    <br>
+    <button onclick="generateGravatar()">Show Image</button>
+    <br>
+    <img id="gravatarImage" alt="Gravatar" width="100" height="100">
+    <p id="gravatarUrl"></p>
+
+    <script src="https://cdn.jsdelivr.net/npm/js-md5@0.7.3/build/md5.min.js"></script>
+    <script>
+        function generateGravatar() {
+            const email = document.getElementById('email').value.trim().toLowerCase();
+            if (email) {
+                const hash = md5(email);
+                const gravatarUrl = `https://www.gravatar.com/avatar/${hash}`;
+                const gravatarImage = document.getElementById('gravatarImage');
+                const gravatarUrlText = document.getElementById('gravatarUrl');
+
+                gravatarImage.src = gravatarUrl;
+                gravatarImage.style.display = 'inline-block';
+
+                gravatarUrlText.textContent = gravatarUrl;
+                gravatarUrlText.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
